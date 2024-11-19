@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azones Bot</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+       
+</head>
+<body>
+    <div class="container-fluid">
+        
+        <div class="row">
+            <!-- Left half: UI for chatbot settings -->
+            <div class="col-md-6 p-4">
+                
+                <div>
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 40px;">
+                    <div style="font-size: 25px; font-weight: bold;">Voice Bot</div>
+                </div>
+                <br>
+                <form id="chatbot-form">
+                    
+                    <div class="form-group">
+                        <label for="chatbotName">Chatbot Name</label>
+                        <input type="text" class="form-control" id="chatbotName" name="chatbotName" value="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="llmModel">Model</label>
+                        <select class="form-control" id="llmModel" name="llmModel">
+                            <option value="LLAMA3">Meta</option>
+                            <option value="Mistral">Mistral</option>
+                            <option value="Gemini">Gemini</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic">Topic</label>
+                        <input type="text" class="form-control" id="topic" name="topic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prompt">Prompt</label>
+                        <input type="text" class="form-control" id="prompt" name="prompt" required>
+                    </div>
+                   
+                    <div id="status" ></div>
+                    <div id="recognizedText"></div>
+                    
+                    <button type="button" id="startStopBtn" class="btn btn-primary btn-lg">Start Conversation</button>
+                    <button type="button" id="pausePlayBtn" class="btn btn-secondary btn-lg" style="display: none;">Pause Conversation</button>
+
+                </form>
+            </div>
+            <!-- Right half: Transcription and conversation history -->
+            <div class="col-md-6 p-4">
+                <button class="btn btn-secondary reload-btn" onclick="reload()">Reload</button>
+                <button class="btn btn-primary download-btn" onclick="downloadCSV()">Download Chat</button>
+                <button class="btn btn-danger stop-btn" id="stopChatbotBtn" style="display: none;" onclick="stopChatbot()">Stop Chatbot</button>
+                <br><br>
+                <h3 id="conversations-heading" style="display: none;">Conversations:</h2>
+                <div id="transcription" class="transcription-box border p-3 bg-light"style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+    <script src="{% static 'js/script.js' %}"></script> 
+</body>
+</html>
